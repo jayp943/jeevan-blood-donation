@@ -122,16 +122,13 @@ function App() {
 
     setLoading(true);
 
-    const { error } = await supabase.from('donors').upsert(
-      {
-        user_id: user.id,
-        display_name: displayName.trim(),
-        blood_group: bloodGroup,
-        city: city.trim(),
-        available: true,
-      },
-      { onConflict: 'user_id' }
-    );
+    const { error } = await supabase.from('donors').insert({
+  user_id: user.id,
+  display_name: displayName.trim(),
+  blood_group: bloodGroup,
+  city: city.trim(),
+  available: true,
+});
 
     setLoading(false);
 
